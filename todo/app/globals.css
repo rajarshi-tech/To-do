@@ -1,0 +1,126 @@
+@import "tailwindcss";
+
+:root {
+  /* PRIMARY (more visible, higher contrast, still pastel) */
+  --primary-1: #7aaeff;   /* main action / links */
+  --primary-2: #6d5efc;   /* strong accent / buttons */
+  --primary-3: #ff7aa2;   /* highlight / emphasis */
+
+  /* SECONDARY (softer support tones) */
+  --secondary-1: #bfe3ff;
+  --secondary-2: #d6c2ff;
+  --secondary-3: #ffd1e8;
+
+  /* BACKGROUND SYSTEM */
+  --background-primary: #fffaf2;  /* warm base */
+  --background-elevated: #ffffff; /* cards */
+  --background-muted: #f6f0ff;    /* soft panels */
+
+  /* TEXT */
+  --text-primary: #1f1f2a;
+  --text-secondary: #5a5a73;
+  --text-muted: #8b8ba7;
+
+  /* BORDER */
+  --border-default: #e6e0f5;
+  --border-strong: #c9c2e6;
+
+  /* INTERACTION STATES */
+  --hover: #5f86ff;     /* hover tint for primary */
+  --active: #4b63ff;    /* click / pressed */
+  --focus: #a78bfa;     /* focus ring (purple pastel) */
+
+  /* SEMANTIC COLORS */
+  --success: #7bd88f;
+  --warning: #ffd27a;
+  --danger:  #ff7a7a;
+  --info:    #7ac7ff;
+
+  /* DISABLED */
+  --disabled-bg: #f1f1f6;
+  --disabled-text: #b3b3c6;
+}
+
+html.dark-mode {
+  /* BACKGROUND SYSTEM (deep but warm, not pure black) */
+  --background-primary: #12131a;   /* main app background */
+  --background-elevated: #1a1c25;  /* cards */
+  --background-muted: #232536;     /* panels */
+
+  /* TEXT (soft white, not pure white) */
+  --text-primary: #f2f3f7;
+  --text-secondary: #c5c7d3;
+  --text-muted: #8c8fa3;
+
+  /* BORDER (subtle separation) */
+  --border-default: #2a2d3d;
+  --border-strong: #3a3f55;
+
+  /* PRIMARY (shifted for glow-on-dark visibility) */
+  --primary-1: #8ab4ff;   /* links / highlights */
+  --primary-2: #7c6cff;   /* main action */
+  --primary-3: #ff8fb3;   /* accent pop */
+
+  /* SECONDARY (muted but still pastel) */
+  --secondary-1: #2a3b55;
+  --secondary-2: #3b2f55;
+  --secondary-3: #553245;
+
+  /* INTERACTION STATES (slightly brighter than base primaries) */
+  --hover: #9bbcff;
+  --active: #6a58ff;
+  --focus: #b59cff;
+
+  /* SEMANTIC COLORS (slightly desaturated for dark UI comfort) */
+  --success: #7fdc9a;
+  --warning: #ffd08a;
+  --danger:  #ff7f8a;
+  --info:    #7fbfff;
+
+  /* DISABLED */
+  --disabled-bg: #1a1c25;
+  --disabled-text: #5f647a;
+}
+
+@theme inline{
+  /* Primary */
+  --color-primary-1: var(--primary-1);
+  --color-primary-2: var(--primary-2);
+  --color-primary-3: var(--primary-3);
+
+  /* Secondary */
+  --color-secondary-1: var(--secondary-1);
+  --color-secondary-2: var(--secondary-2);
+  --color-secondary-3: var(--secondary-3);
+
+  /* Backgrounds */
+  --color-background-primary: var(--background-primary);
+  --color-background-elevated: var(--background-elevated);
+  --color-background-muted: var(--background-muted);
+
+  /* Text */
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+
+  /* Borders */
+  --color-border-default: var(--border-default);
+  --color-border-strong: var(--border-strong);
+
+  /* Interaction */
+  --color-hover: var(--hover);
+  --color-active: var(--active);
+  --color-focus: var(--focus);
+
+  /* Semantic */
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+  --color-info: var(--info);
+
+  /* Disabled */
+  --color-disabled-bg: var(--disabled-bg);
+  --color-disabled-text: var(--disabled-text);
+}
+
+
