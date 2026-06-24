@@ -1,17 +1,35 @@
 "use client"
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { mPlusRounded1c } from "../lib/font";
 import { UserRound } from 'lucide-react';
 
 export default function Header() {
+  const themeKey: string = "theme";
   const [open, setOpen] = useState(false);
   // button design cursor-pointer p-2 hover:bg-background-muted/50 border-y border-primary-1 hover:border-primary-2
-  const handleToggle = () => {
-    document.documentElement.classList.toggle('dark-mode');
-  };
-  
+  const [dark, setDark] = useState(false);
+
+  useEffect(() => {
+    const theme = localStorage.getItem(themeKey) ?? "dark";
+    const setdark = async(value: boolean) => {
+      setDark(value);
+    }
+    localStorage.setItem(themeKey, theme);
+
+    const isDark = theme === "dark";
+    setdark(isDark);
+    document.documentElement.classList.toggle("dark-mode", isDark);
+  }, []);
+
+const handleToggle = () => {
+  const next = !dark;
+
+  setDark(next);
+  localStorage.setItem(themeKey, next ? "dark" : "light");
+  document.documentElement.classList.toggle("dark-mode", next);
+};
   return (
     <>
       {/* overlay (for floating menu) */}
