@@ -16,6 +16,7 @@
   --background-elevated: #ffffff; /* cards */
   --background-muted: #f6f0ff;    /* soft panels */
 
+
   /* TEXT */
   --text-primary: #1f1f2a;
   --text-secondary: #5a5a73;
@@ -41,7 +42,7 @@
   --disabled-text: #b3b3c6;
 }
 
-html.dark-mode {
+.dark {
   /* BACKGROUND SYSTEM (deep but warm, not pure black) */
   --background-primary: #12131a;   /* main app background */
   --background-elevated: #1a1c25;  /* cards */
@@ -123,4 +124,30 @@ html.dark-mode {
   --color-disabled-text: var(--disabled-text);
 }
 
+body {
+  background-image: url("./assets/bg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 
+@media (min-width: 768px) {
+  body {
+    background-image: url("./assets/bg-wide.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+}
+
+.dark body {
+  background-image: url("./assets/bg-dark.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@media (min-width: 768px) {
+  .dark body {
+    background-image: url("./assets/bg-wide-dark.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+}

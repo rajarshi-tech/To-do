@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
-
+import { Plus } from "lucide-react";
 import { plusJakartaSans } from "./lib/font";
 import Header from './components/Header';
 import Footer from './components/Footer';
+import { ThemeProvider } from "next-themes";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,14 +20,22 @@ export default function RootLayout({
     <html
       lang="en"
       className={`h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className={`${plusJakartaSans.className} min-h-full flex flex-col bg-background-primary text-text-primary`}>
-        <Header />
-        <main className="flex-1">
-          {children}
-        </main>
-        <Footer />
-      </body>
+      
+        <body className={`${plusJakartaSans.className} bg-background-primary min-h-full flex flex-col text-text-primary`}>
+          <ThemeProvider attribute="class" enableSystem defaultTheme="system">
+            <div className="z-30 fixed bottom-28 rounded-full right-8 p-2 bg-secondary-3/30 backdrop-blur-md">
+              <Plus className="w-8 h-8 text-primary-3"/>
+            </div>
+            <Header />
+            <main className="flex-1">
+              {children}
+            </main>
+            <Footer />
+          </ThemeProvider>
+        </body>
+      
     </html>
   );
 }
