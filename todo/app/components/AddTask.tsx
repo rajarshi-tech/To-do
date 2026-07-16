@@ -3,9 +3,17 @@
 import { motion, useDragControls } from "motion/react";
 import { CircleX } from "lucide-react";
 import { useModal } from "../context/AddTaskModalContext";
+import { useState } from "react";
 export default function AddTask() {
   const controls = useDragControls();
   const { close } = useModal();
+  const [ task, setTask ] = useState<string>("");
+  const [ dateTime, setDateTime ] = useState<string>("");
+
+  const handleSubmit = (): void => {
+    console.log("yee")
+    console.log(dateTime);
+  }
 
   return (
     <>
@@ -36,6 +44,8 @@ export default function AddTask() {
             <input
               type="text"
               placeholder="Task"
+              value={task}
+              onChange={ (e: React.ChangeEvent<HTMLInputElement>) => setTask(e.target.value)}
               className="flex-1 w-full md:w-56 rounded-2xl bg-background/40 border border-text-muted/20
               px-4 py-2 text-text-primary placeholder:text-text-muted
               outline-none transition-all duration-200
@@ -43,6 +53,8 @@ export default function AddTask() {
             />
             <input
               type="datetime-local"
+              value={dateTime}
+              onChange={ (e: React.ChangeEvent<HTMLInputElement>) => setDateTime(e.target.value)}
               className="h-12
               w-full md:w-56
               rounded-2xl
@@ -62,6 +74,7 @@ export default function AddTask() {
               className="bg-primary-3 text-text-primary border-0 rounded-2xl py-2 w-full md:w-28 cursor-pointer transition-all duration-200
               hover:bg-primary-3/60 hover:text-text-secondary hover:-translate-y-0.5 hover:scale-95
               active:bg-primary-3/80 active:translate-y-0 active:scale-100"
+              onClick={() => handleSubmit()}
             >
               Add
             </button>
@@ -69,6 +82,7 @@ export default function AddTask() {
               className="bg-primary-3 text-text-primary border-0 rounded-2xl py-2 w-full md:w-28 cursor-pointer transition-all duration-200
               hover:bg-primary-3/60 hover:text-text-secondary hover:-translate-y-0.5 hover:scale-95
               active:bg-primary-3/80 active:translate-y-0 active:scale-100"
+              onClick={() => close()}
             >
               Cancle
             </button>
