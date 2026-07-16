@@ -28,6 +28,13 @@ export default function Home() {
             hover:translate-y-0.5 hover:bg-background-muted/30 hover:scale-95
             active:bg-primary-2/5 active:text-text-secondary active:translate-y-0.5 active:scale-100"
           >
+            All tasks
+          </div>
+          <div
+            className="text-text-primary border-b border-b-primary-2 p-2 transition-all duration-200
+            hover:translate-y-0.5 hover:bg-background-muted/30 hover:scale-95
+            active:bg-primary-2/5 active:text-text-secondary active:translate-y-0.5 active:scale-100"
+          >
             Upcoming tasks
           </div>
           <div

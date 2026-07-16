@@ -36,9 +36,9 @@ export default function Header() {
             {/* Hamburger icon */}
             <div
               className="md:hidden p-2 ml-2 transition-all duration-200 cursor-pointer
-            hover:-translate-y-0.5
-            active:translate-y-0 active:scale-105"
-            onClick={() => {
+              hover:-translate-y-0.5
+              active:translate-y-0 active:scale-105"
+              onClick={() => {
               setHamburger(!hamburger);
               if(open) setOpen(false);
             }}
