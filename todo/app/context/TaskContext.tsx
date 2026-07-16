@@ -1,8 +1,17 @@
-import { createContext, useContext, ReactNode, useEffect, useState } from "react";
+"use client"
+
+import {
+  createContext,
+  useContext,
+  ReactNode,
+  useEffect,
+  useState,
+} from "react";
 import type { Task, Tasks } from "../types/task";
 import processTask from "../util/processTask";
 
 type TaskContextType = {
+  tasks: Tasks;
   loadTasks: () => void;
   addTask: (task: string, dateTime: string) => void;
   deleteTask: () => void;
@@ -16,28 +25,14 @@ const TaskContext = createContext<TaskContextType | null>(null);
 const key: string = "task";
 
 export default function TaskProvider({ children }: { children: ReactNode }) {
-
-  const [ tasks, setTasks ] = useState<Tasks>({
-    tasks: [{
-      id: crypto.randomUUID(),
-      task: "example",
-      date: "2026-07-16",
-      time: "21:20",
-      status: "pending"
-    }]
-  });
+  const [tasks, setTasks] = useState<Tasks>({tasks: []});
 
   const loadTasks = () => {
     const taskObjs: string | null = localStorage.getItem(key);
     if (taskObjs && typeof taskObjs !== null) {
-        setTasks(JSON.parse(taskObjs));
+      setTasks(JSON.parse(taskObjs));
     }
-  }
-
-  const saveTasks = (newTasks: Tasks) => {
-    setTasks(newTasks);
-    localStorage.setItem(key, JSON.stringify(newTasks));
-  }
+  };
 
   useEffect(() => {
     const loadTasksAsync = async () => {
@@ -48,20 +43,28 @@ export default function TaskProvider({ children }: { children: ReactNode }) {
 
   const addTask = (task: string, dateTime: string): void => {
     const newTask: Task = processTask(task, dateTime);
-    const newTasks: Tasks = {
-      tasks: [...tasks.tasks, newTask]
-    };
-    saveTasks(newTasks);    
-  }
+    setTasks((prev) => {
+      const updated = {
+        tasks: [...prev.tasks, newTask],
+      };
+
+      localStorage.setItem(key, JSON.stringify(updated));
+
+      return updated;
+    });
+  };
   return (
-    <TaskContext.Provider value={{
-      loadTasks,
-      addTask,
-      deleteTask: () => {},
-      editTask: () => {},
-      updateTaskState: () => {},
-      clearDeletedTasks: () => {},
-    }}>
+    <TaskContext.Provider
+      value={{
+        tasks,
+        loadTasks,
+        addTask,
+        deleteTask: () => {},
+        editTask: () => {},
+        updateTaskState: () => {},
+        clearDeletedTasks: () => {},
+      }}
+    >
       {children}
     </TaskContext.Provider>
   );
@@ -71,7 +74,7 @@ export function useTask() {
   const context = useContext(TaskContext);
 
   if (!context) {
-    throw new Error("useTask must be used within a ModalProvider");
+    throw new Error("useTask must be used within a TaskProvider");
   }
 
   return context;

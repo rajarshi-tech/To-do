@@ -4,15 +4,18 @@ import { motion, useDragControls } from "motion/react";
 import { CircleX } from "lucide-react";
 import { useModal } from "../context/AddTaskModalContext";
 import { useState } from "react";
+import { useTask } from "../context/TaskContext";
 export default function AddTask() {
   const controls = useDragControls();
   const { close } = useModal();
   const [ task, setTask ] = useState<string>("");
   const [ dateTime, setDateTime ] = useState<string>("");
 
+  const { addTask } = useTask();
+
   const handleSubmit = (): void => {
-    console.log("yee")
-    console.log(dateTime);
+    addTask(task, dateTime);
+    close();
   }
 
   return (

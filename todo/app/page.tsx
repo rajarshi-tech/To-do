@@ -4,8 +4,11 @@ import { Plus } from "lucide-react";
 import { mPlusRounded1c } from "./lib/font";
 import AddTask from "./components/AddTask";
 import { useModal } from "./context/AddTaskModalContext";
+import Tasks from "./components/Tasks";
+
 export default function Home() {
   const { toggle, isOpen } = useModal();
+
   return (
     <>
       {/* add task icon */}
@@ -54,12 +57,15 @@ export default function Home() {
         </div>
         <div className="flex-5">
           <div
-            className={`${mPlusRounded1c.className} text-2xl md:text-4xl font-semibold ml-4 mb-8 mt-2`}
+            className={`${mPlusRounded1c.className} text-2xl md:text-4xl font-semibold mb-8 mt-2`}
           >
             Welcome, Rajarshi!
           </div>
           <div className="bg-secondary-3/30 backdrop-blur-md p-4 rounded-md border-2 border-border-default">
-            <p className="text-2xl font-medium">Tasks</p>
+            <div className="block text-2xl md:text-3xl font-medium border-b border-text-muted/50 py-2 mb-2">Tasks</div>
+            <div>
+              <Tasks />
+            </div>
           </div>
         </div>
       </div>
