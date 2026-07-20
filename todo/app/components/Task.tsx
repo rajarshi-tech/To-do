@@ -8,15 +8,16 @@ type TaskProps = {
 };
 
 export default function Task({ task }: TaskProps) {
+  
   return (
     <div className="flex justify-between items-center p-4 rounded-2xl bg-primary-2">
-      <div className="flex items-center">
+      <div className="flex items-center flex-1">
         <div className="cursor-pointer">
           {task.status === "pending" ? <Circle /> : task.status === "completed" ? <CircleCheck/ > : <CircleSlash2 />}
         </div>
         <span className={`block ml-4 ${task.status === "completed" || task.status === "deleted" ? "lineth text-text-secondary" : ""}`}>{task.task}</span>
       </div>
-      <div className="flex">
+      <div className="flex flex-1">
         <div className="flex justify-around items-center">
           <CalendarDays />
           {formatDate(task.date)}
