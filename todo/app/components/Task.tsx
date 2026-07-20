@@ -1,34 +1,59 @@
-import { CalendarDays, Dot, Circle, CircleSlash2, CircleCheck, Trash2, Pencil } from "lucide-react";
+import {
+  CalendarDays,
+  Dot,
+  Circle,
+  CircleSlash2,
+  CircleCheck,
+  Trash2,
+  Pencil,
+} from "lucide-react";
 import type { Task } from "../types/task";
 import { formatDate, formatTime } from "../util/Formatter";
-import "./temp fix/temp.css";
+import { useTask } from "../context/TaskContext";
 
 type TaskProps = {
   task: Task;
 };
 
 export default function Task({ task }: TaskProps) {
-  
+  const { toggleTaskStatus } = useTask();
+
+  const handleTaskStatus = (): void => {
+    toggleTaskStatus(task.id);
+  };
+
   return (
-    <div className="flex justify-between items-center p-4 rounded-2xl bg-primary-2">
-      <div className="flex items-center flex-1">
-        <div className="cursor-pointer">
-          {task.status === "pending" ? <Circle /> : task.status === "completed" ? <CircleCheck/ > : <CircleSlash2 />}
+    <div className="my-1 grid grid-cols-[minmax(0,1fr)_auto] items-center p-4 rounded-2xl bg-primary-3/10">
+      <div className="flex items-center min-w-0">
+        <div className="cursor-pointer shrink-0" onClick={() => handleTaskStatus()}>
+          {task.status === "pending" ? (
+            <Circle className="h-5 w-5" />
+          ) : task.status === "completed" ? (
+            <CircleCheck className="h-5 w-5" />
+          ) : (
+            <CircleSlash2 className="h-5 w-5" />
+          )}
         </div>
-        <span className={`block ml-4 ${task.status === "completed" || task.status === "deleted" ? "lineth text-text-secondary" : ""}`}>{task.task}</span>
+        <span
+          className={`block ml-4 truncate ${task.status === "completed" || task.status === "deleted" ? "line-through text-text-secondary" : ""}`}
+        >
+          {task.task}
+        </span>
       </div>
-      <div className="flex flex-1">
-        <div className="flex justify-around items-center">
-          <CalendarDays />
+      <div className="flex items-center gap-4">
+        <div className="w-44 flex items-center gap-0 whitespace-nowrap">
+          <CalendarDays className="h-4 w-4" />
           {formatDate(task.date)}
-          <Dot />
+          <Dot className="h-4 w-4" />
           {formatTime(task.time)}
         </div>
-        <div className="ml-4 rounded-2xl border-text-primary border-2 border-solid px1 align-middle py-1.5">{task.status}</div>
-        <div className="flex ml-4">
-          <Trash2 />
-          <span className="block mx-2">|</span>
-          <Pencil />
+        <div className="rounded-full border px-2 py-0.5 text-xs w-19 align-middle text-center leading-4">
+          {task.status}
+        </div>
+        <div className="flex items-center gap-1">
+          <Trash2 className="h-4 w-4 cursor-pointer" />
+          <span>|</span>
+          <Pencil className="h-4 w-4 cursor-pointer" />
         </div>
       </div>
     </div>

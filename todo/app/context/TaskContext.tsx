@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import {
   createContext,
@@ -16,7 +16,7 @@ type TaskContextType = {
   addTask: (task: string, dateTime: string) => void;
   deleteTask: () => void;
   editTask: () => void;
-  updateTaskState: () => void;
+  toggleTaskStatus: (id: string) => void;
   clearDeletedTasks: () => void;
 };
 
@@ -25,7 +25,7 @@ const TaskContext = createContext<TaskContextType | null>(null);
 const key: string = "task";
 
 export default function TaskProvider({ children }: { children: ReactNode }) {
-  const [tasks, setTasks] = useState<Tasks>({tasks: []});
+  const [tasks, setTasks] = useState<Tasks>({ tasks: [] });
 
   const loadTasks = () => {
     const taskObjs: string | null = localStorage.getItem(key);
@@ -34,16 +34,16 @@ export default function TaskProvider({ children }: { children: ReactNode }) {
     }
     if (!taskObjs) {
       setTasks({
-        tasks:[
+        tasks: [
           {
             id: crypto.randomUUID(),
             task: "test",
             date: "2023-10-19",
             time: "14:56",
-            status: "completed"
-          }
-        ]
-      })
+            status: "completed",
+          },
+        ],
+      });
     }
   };
 
@@ -66,6 +66,29 @@ export default function TaskProvider({ children }: { children: ReactNode }) {
       return updated;
     });
   };
+
+  const toggleTaskStatus = (id: string): void => {
+    setTasks(prev => {
+      const updated: Tasks = {
+        ...prev,
+        tasks: prev.tasks.map(task =>
+          task.id === id
+            ? {
+                ...task,
+                status:
+                  task.status === "pending"
+                    ? "completed"
+                    : "pending",
+              }
+            : task
+        ),
+      };
+
+      localStorage.setItem(key, JSON.stringify(updated));
+      return updated;
+    });
+  };
+
   return (
     <TaskContext.Provider
       value={{
@@ -74,7 +97,7 @@ export default function TaskProvider({ children }: { children: ReactNode }) {
         addTask,
         deleteTask: () => {},
         editTask: () => {},
-        updateTaskState: () => {},
+        toggleTaskStatus,
         clearDeletedTasks: () => {},
       }}
     >
