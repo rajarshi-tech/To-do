@@ -1,6 +1,7 @@
-import { CalendarDays } from "lucide-react";
+import { CalendarDays, Dot, Circle, CircleSlash2, CircleCheck, Trash2, Pencil } from "lucide-react";
 import type { Task } from "../types/task";
 import { formatDate, formatTime } from "../util/Formatter";
+import "./temp fix/temp.css";
 
 type TaskProps = {
   task: Task;
@@ -8,29 +9,26 @@ type TaskProps = {
 
 export default function Task({ task }: TaskProps) {
   return (
-    <div className="group rounded-2xl border border-border-default bg-background-elevated/60 backdrop-blur-md p-4 transition-all duration-200 hover:border-primary-2 hover:shadow-lg hover:shadow-primary-1/10 mt-2">
-      <div className="flex items-start justify-between">
-        <h3 className="text-xl font-semibold text-text-primary">{task.task}</h3>
-
-        <span
-          className={`rounded-full px-3 py-1 text-xs font-medium capitalize
-        ${
-          task.status === "completed"
-            ? "bg-green-500/15 text-green-400"
-            : task.status === "pending"
-              ? "bg-amber-500/15 text-amber-300"
-              : "bg-red-500/15 text-red-400"
-        }`}
-        >
-          {task.status}
-        </span>
+    <div className="flex justify-between items-center p-4 rounded-2xl bg-primary-2">
+      <div className="flex items-center">
+        <div className="cursor-pointer">
+          {task.status === "pending" ? <Circle /> : task.status === "completed" ? <CircleCheck/ > : <CircleSlash2 />}
+        </div>
+        <span className={`block ml-4 ${task.status === "completed" || task.status === "deleted" ? "lineth text-text-secondary" : ""}`}>{task.task}</span>
       </div>
-
-      <div className="mt-3 flex items-center gap-2 text-sm text-text-muted">
-        <CalendarDays size={16} />
-        <span>
-          {formatDate(task.date)} • {formatTime(task.time)}
-        </span>
+      <div className="flex">
+        <div className="flex justify-around items-center">
+          <CalendarDays />
+          {formatDate(task.date)}
+          <Dot />
+          {formatTime(task.time)}
+        </div>
+        <div className="ml-4 rounded-2xl border-text-primary border-2 border-solid px1 align-middle py-1.5">{task.status}</div>
+        <div className="flex ml-4">
+          <Trash2 />
+          <span className="block mx-2">|</span>
+          <Pencil />
+        </div>
       </div>
     </div>
   );

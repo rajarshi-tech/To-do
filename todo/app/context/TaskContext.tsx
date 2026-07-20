@@ -32,6 +32,19 @@ export default function TaskProvider({ children }: { children: ReactNode }) {
     if (taskObjs && typeof taskObjs !== null) {
       setTasks(JSON.parse(taskObjs));
     }
+    if (!taskObjs) {
+      setTasks({
+        tasks:[
+          {
+            id: crypto.randomUUID(),
+            task: "test",
+            date: "2023-10-19",
+            time: "14:56",
+            status: "completed"
+          }
+        ]
+      })
+    }
   };
 
   useEffect(() => {
