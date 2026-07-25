@@ -1,14 +1,17 @@
-import { signIn } from "@/auth"
- 
-export default function SignIn() {
+import { signInAction } from "@/app/actions/auth";
+
+type PropType = {
+  className: string;
+  children: React.ReactNode;
+};
+
+export default function SignIn({ className, children }: PropType) {
   return (
     <form
-      action={async () => {
-        "use server"
-        await signIn("github", { redirectTo: "/home" })
-      }}
+      className="inline p-0 m-0"
+      action={signInAction}
     >
-      <button type="submit">Sign in</button>
+      <button className={className} type="submit">{children}</button>
     </form>
   )
 }

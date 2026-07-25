@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { plusJakartaSans } from "./lib/font";
-import Header from './components/Header';
+import Header from './components/Header/Header';
 import Footer from './components/Footer';
 import { ThemeProvider } from "next-themes";
 import AddTaskModalProvider from "./context/AddTaskModalContext";
 import TaskProvider from "./context/TaskContext";
+import HeaderProvider from "./context/HeaderContext";
 //import Providers from "./providers";
 
 export const metadata: Metadata = {
@@ -28,7 +29,9 @@ export default function RootLayout({
         <body className={`${plusJakartaSans.className} bg-background-primary min-h-full flex flex-col text-text-primary`}>
           {/*<Providers>*/}
             <ThemeProvider attribute="class" enableSystem defaultTheme="system">
-              <Header />
+              <HeaderProvider>
+                <Header />
+              </HeaderProvider>
               <main className="flex-1">
                 <AddTaskModalProvider>
                   <TaskProvider>
