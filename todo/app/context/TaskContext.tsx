@@ -14,7 +14,7 @@ type TaskContextType = {
   tasks: Tasks;
   loadTasks: () => void;
   addTask: (task: string, dateTime: string) => void;
-  deleteTask: () => void;
+  deleteTask: (id: string) => void;
   editTask: () => void;
   toggleTaskStatus: (id: string) => void;
   clearDeletedTasks: () => void;
@@ -31,19 +31,6 @@ export default function TaskProvider({ children }: { children: ReactNode }) {
     const taskObjs: string | null = localStorage.getItem(key);
     if (taskObjs && typeof taskObjs !== null) {
       setTasks(JSON.parse(taskObjs));
-    }
-    if (!taskObjs) {
-      setTasks({
-        tasks: [
-          {
-            id: crypto.randomUUID(),
-            task: "test",
-            date: "2023-10-19",
-            time: "14:56",
-            status: "completed",
-          },
-        ],
-      });
     }
   };
 
@@ -89,16 +76,47 @@ export default function TaskProvider({ children }: { children: ReactNode }) {
     });
   };
 
+  const clearDeletedTasks = (): void => {
+    setTasks(prev => {
+      const updated: Tasks = {
+        ...prev,
+        tasks: prev.tasks.filter(task => task.status !== "deleted")
+      };
+
+      localStorage.setItem(key, JSON.stringify(updated));
+      return updated;
+    });
+  }
+
+  const deleteTask = (id: string): void => {
+    setTasks(prev => {
+      const updated: Tasks = {
+        ...prev,
+        tasks: prev.tasks.map(task =>
+          task.id === id
+            ? {
+                ...task,
+                status: "deleted"
+              }
+            : task
+        )
+      };
+
+      localStorage.setItem(key, JSON.stringify(updated));
+      return updated;
+    });
+  }
+
   return (
     <TaskContext.Provider
       value={{
         tasks,
         loadTasks,
         addTask,
-        deleteTask: () => {},
+        deleteTask,
         editTask: () => {},
         toggleTaskStatus,
-        clearDeletedTasks: () => {},
+        clearDeletedTasks,
       }}
     >
       {children}

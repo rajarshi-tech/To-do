@@ -14,13 +14,17 @@ import { useTask } from "../context/TaskContext";
 type TaskProps = {
   task: Task;
 };
-
+//Add tooltips
 export default function Task({ task }: TaskProps) {
-  const { toggleTaskStatus } = useTask();
+  const { toggleTaskStatus, deleteTask } = useTask();
 
   const handleTaskStatus = (): void => {
     toggleTaskStatus(task.id);
   };
+
+  const handleDelete = (): void => {
+    deleteTask(task.id);
+  }
 
   return (
     <div className="my-1 grid grid-cols-[minmax(0,1fr)_auto] items-center p-4 rounded-2xl bg-primary-3/10">
@@ -51,7 +55,7 @@ export default function Task({ task }: TaskProps) {
           {task.status}
         </div>
         <div className="flex items-center gap-1">
-          <Trash2 className="h-4 w-4 cursor-pointer" />
+          <Trash2 className="h-4 w-4 cursor-pointer" onClick={() => handleDelete()} />
           <span>|</span>
           <Pencil className="h-4 w-4 cursor-pointer" />
         </div>
