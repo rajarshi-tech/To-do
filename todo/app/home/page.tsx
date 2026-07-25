@@ -6,13 +6,10 @@ import AddTask from "../components/AddTask";
 import { useModal } from "../context/AddTaskModalContext";
 import Tasks from "../components/Tasks";
 import { useState } from "react";
-import { useSession } from "next-auth/react"
 
 export default function Home() {
   const { toggle, isOpen } = useModal();
   const [ filter, setFilter ] = useState<string>("");
-
-  const { data: session } = useSession()
 
   const handleFilter = (filterValue: string) => {
     setFilter(filterValue);
@@ -72,7 +69,7 @@ export default function Home() {
           <div
             className={`${mPlusRounded1c.className} text-2xl md:text-4xl font-semibold mb-8 mt-2`}
           >
-            Welcome, {session?.user?.name || "Guest"}!
+            Welcome, {"Guest"}!
           </div>
           <div className="bg-secondary-3/30 backdrop-blur-md p-4 rounded-md border-2 border-border-default">
             <div className="block text-2xl md:text-3xl font-medium border-b border-text-muted/50 pb-3.5 mb-2">Tasks</div>

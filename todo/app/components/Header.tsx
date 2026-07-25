@@ -29,7 +29,7 @@ export default function Header() {
       />
 
       {/* Main Header */}
-      <div className="flex justify-between items-center bg-secondary-1/30 backdrop-blur-md sticky top-0 z-50">
+      <nav className="flex justify-between items-center bg-secondary-1/30 backdrop-blur-md sticky top-0 z-50">
         {/* Main Logo */}
         <div className="flex items-center">
           {/* Hamburger icon and floating menu container */}
@@ -130,7 +130,7 @@ export default function Header() {
             </Link>
           </div>
         </div>
-      </div>
+      </nav>
     </>
   );
 }

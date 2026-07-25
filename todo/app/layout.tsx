@@ -6,7 +6,7 @@ import Footer from './components/Footer';
 import { ThemeProvider } from "next-themes";
 import AddTaskModalProvider from "./context/AddTaskModalContext";
 import TaskProvider from "./context/TaskContext";
-import Providers from "./providers";
+//import Providers from "./providers";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -26,7 +26,7 @@ export default function RootLayout({
     >
       
         <body className={`${plusJakartaSans.className} bg-background-primary min-h-full flex flex-col text-text-primary`}>
-          <Providers>
+          {/*<Providers>*/}
             <ThemeProvider attribute="class" enableSystem defaultTheme="system">
               <Header />
               <main className="flex-1">
@@ -38,9 +38,8 @@ export default function RootLayout({
               </main>
               <Footer />
             </ThemeProvider>
-          </Providers>
+          {/*</Providers>*/}
         </body>
-      
     </html>
   );
 }
