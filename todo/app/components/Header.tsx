@@ -5,6 +5,7 @@ import { useState } from "react";
 import { mPlusRounded1c } from "../lib/font";
 import { UserRound, Menu } from "lucide-react";
 import { useTheme } from "next-themes";
+import { signOut } from "next-auth/react"
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -75,7 +76,7 @@ export default function Header() {
             </div>
           </div>
           <Link
-            href="/"
+            href="/home"
             className={`${mPlusRounded1c.className} block cursor-pointer mx-1.5 my-2 font-black text-4xl p-2 text-primary-1`}
           >
             Todo
@@ -107,6 +108,7 @@ export default function Header() {
               className="text-text-primary mx-2 my-1 rounded-2xl px-4 py-2.5 cursor-pointer bg-secondary-1/60 transition-all duration-150
               hover:bg-secondary-1/40 hover:translate-x-1 hover:scale-[1.02] hover:text-text-secondary
               active:scale-95 active:bg-primary-1/20"
+              onClick={() => signOut({ callbackUrl: "/" })}
             >
               Sign out
             </div>
