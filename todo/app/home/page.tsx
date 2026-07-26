@@ -10,7 +10,7 @@ export default async function Home() {
     <>
       <AddTaskComponent />
       {/* main content */}
-      <MainContent name={session?.user?.name || "Guest"} />
+      <MainContent name={session?.user?.name ?? "Guest"} />
     </>
   );
 }
