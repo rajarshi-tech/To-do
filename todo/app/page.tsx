@@ -15,7 +15,7 @@ export default async function Home() {
     <main className="min-h-screen flex items-center justify-center">
       <div className="p-8 rounded-2xl bg-white/10 backdrop-blur-md">
         <h1 className="text-3xl font-bold mb-6">Welcome</h1>
-        <SignIn className="cursor-pointer p-4 bg-primary-1">Sign in with GitHub</SignIn>
+        <SignIn buttonClassName="cursor-pointer p-4 bg-primary-1 rounded-2xl">Sign in with GitHub</SignIn>
       </div>
     </main>
   );

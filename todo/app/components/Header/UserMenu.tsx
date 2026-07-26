@@ -1,12 +1,18 @@
 "use client";
 
-import { useHeader } from "../../context/HeaderContext"
-import { UserRound } from "lucide-react";
+import { useHeader } from "../../context/HeaderContext";
 import { useTheme } from "next-themes";
+import Image from "next/image";
 import Link from "next/link";
 import SignOut from "../sign-out";
+import { UserRound } from "lucide-react";
 
-export default function UserMenu() {
+type UserMenuProps = {
+  image: string;
+  name: string;
+};
+
+export default function UserMenu({ image, name }: UserMenuProps) {
   const { theme, setTheme } = useTheme();
 
   const handleToggle = () => {
@@ -28,7 +34,19 @@ export default function UserMenu() {
             if (hamburger) hamburgerClose();
           }}
         >
-          <UserRound className="w-6 h-6 text-primary-1" />
+          <div>
+            {image !== "" ? (
+              <Image
+                src={image}
+                alt={name || "User Avatar"}
+                width={32}
+                height={32}
+                className="rounded-full"
+              />
+            ) : (
+              <UserRound className="w-6 h-6 text-primary-1" />
+            )}
+          </div>
         </div>
 
         {/* floating menu */}

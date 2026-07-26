@@ -1,17 +1,18 @@
 import { signInAction } from "@/app/actions/auth";
 
 type PropType = {
-  className: string;
+  formClassName?: string;
+  buttonClassName?: string;
   children: React.ReactNode;
 };
 
-export default function SignIn({ className, children }: PropType) {
+export default function SignIn({ formClassName, buttonClassName, children }: PropType) {
   return (
     <form
-      className="inline p-0 m-0"
+      className={formClassName}
       action={signInAction}
     >
-      <button className={className} type="submit">{children}</button>
+      <button className={buttonClassName} type="submit">{children}</button>
     </form>
   )
 }

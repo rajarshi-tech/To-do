@@ -1,11 +1,13 @@
+import { auth } from "@/auth";
 import Link from "next/link";
 import { mPlusRounded1c } from "../../lib/font";
 import HamburgerMenu from "./HamburgerMenu";
 import Overlay from "./Overlay";
 import UserMenu from "./UserMenu";
+import Login from "./Login";
 
-export default function Header() {
-
+export default async function Header() {
+  const session = await auth();
 
   return (
     <>
@@ -25,7 +27,10 @@ export default function Header() {
             Todo
           </Link>
         </div>
-        <UserMenu />
+        {session ? <UserMenu
+          image={session?.user?.image ?? ""}
+          name={session?.user?.name ?? ""}
+        /> : <Login />}
       </nav>
     </>
   );
