@@ -8,7 +8,7 @@ import Login from "./Login";
 
 export default async function Header() {
   const session = await auth();
-
+  
   return (
     <>
       {/* overlay (for floating menu) */}

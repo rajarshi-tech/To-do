@@ -14,7 +14,7 @@ type UserMenuProps = {
 
 export default function UserMenu({ image, name }: UserMenuProps) {
   const { theme, setTheme } = useTheme();
-
+  
   const handleToggle = () => {
     setTheme(theme === "dark" ? "light" : "dark");
   };
@@ -72,7 +72,7 @@ export default function UserMenu({ image, name }: UserMenuProps) {
             Change theme
           </div>
           <Link
-            href="/about"
+            href="/home/about"
             className="text-text-primary block mx-2 my-1 rounded-2xl px-4 py-2.5 cursor-pointer bg-secondary-1/60 transition-all duration-150
               hover:bg-secondary-1/40 hover:translate-x-1 hover:scale-[1.02] hover:text-text-secondary
               active:scale-95 active:bg-primary-1/20"

@@ -7,6 +7,7 @@ import { ThemeProvider } from "next-themes";
 import AddTaskModalProvider from "./context/AddTaskModalContext";
 import TaskProvider from "./context/TaskContext";
 import HeaderProvider from "./context/HeaderContext";
+import TaskFilterProvider from "./context/TaskFilterContext";
 //import Providers from "./providers";
 
 export const metadata: Metadata = {
@@ -29,16 +30,18 @@ export default function RootLayout({
         <body className={`${plusJakartaSans.className} bg-background-primary min-h-full flex flex-col text-text-primary`}>
           {/*<Providers>*/}
             <ThemeProvider attribute="class" enableSystem defaultTheme="system">
-              <HeaderProvider>
-                <Header />
-              </HeaderProvider>
-              <main className="flex-1">
-                <AddTaskModalProvider>
-                  <TaskProvider>
-                    {children}
-                  </TaskProvider>
-                </AddTaskModalProvider>
-              </main>
+              <TaskFilterProvider>
+                <HeaderProvider>
+                  <Header />
+                </HeaderProvider>
+                <main className="flex-1">
+                  <AddTaskModalProvider>
+                    <TaskProvider>
+                      {children}
+                    </TaskProvider>
+                  </AddTaskModalProvider>
+                </main>
+              </TaskFilterProvider>
               <Footer />
             </ThemeProvider>
           {/*</Providers>*/}

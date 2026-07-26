@@ -2,10 +2,12 @@
 
 import { Menu } from "lucide-react";
 import { useHeader } from "@/app/context/HeaderContext";
+import { useFilter } from "@/app/context/TaskFilterContext";
 
 export default function HamburgerMenu() {
   const { userMenu, hamburger, userMenuClose, hamburgerToggle } = useHeader();
-
+  const { handleFilter } = useFilter();
+  
   return (
     <div className="relative">
       {/* Hamburger icon */}
@@ -30,6 +32,15 @@ export default function HamburgerMenu() {
           className="text-text-primary mx-2 my-1 rounded-2xl px-4 py-2.5 cursor-pointer bg-secondary-1/60 transition-all duration-150
               hover:bg-secondary-1/40 hover:translate-x-1 hover:scale-[1.02] hover:text-text-secondary
               active:scale-95 active:bg-primary-1/20"
+          onClick={() => handleFilter("all")}
+        >
+          All tasks
+        </div>
+        <div
+          className="text-text-primary mx-2 my-1 rounded-2xl px-4 py-2.5 cursor-pointer bg-secondary-1/60 transition-all duration-150
+              hover:bg-secondary-1/40 hover:translate-x-1 hover:scale-[1.02] hover:text-text-secondary
+              active:scale-95 active:bg-primary-1/20"
+          onClick={() => handleFilter("pending")}
         >
           Upcoming tasks
         </div>
@@ -37,6 +48,7 @@ export default function HamburgerMenu() {
           className="text-text-primary mx-2 my-1 rounded-2xl px-4 py-2.5 cursor-pointer bg-secondary-1/60 transition-all duration-150
               hover:bg-secondary-1/40 hover:translate-x-1 hover:scale-[1.02] hover:text-text-secondary
               active:scale-95 active:bg-primary-1/20"
+          onClick={() => handleFilter("completed")}
         >
           Completed tasks
         </div>
@@ -44,6 +56,7 @@ export default function HamburgerMenu() {
           className="text-text-primary mx-2 my-1 rounded-2xl px-4 py-2.5 cursor-pointer bg-secondary-1/60 transition-all duration-150
               hover:bg-secondary-1/40 hover:translate-x-1 hover:scale-[1.02] hover:text-text-secondary
               active:scale-95 active:bg-primary-1/20"
+          onClick={() => handleFilter("deleted")}
         >
           Deleted tasks
         </div>

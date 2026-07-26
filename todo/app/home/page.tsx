@@ -5,15 +5,11 @@ import { mPlusRounded1c } from "../lib/font";
 import AddTask from "../components/AddTask";
 import { useModal } from "../context/AddTaskModalContext";
 import Tasks from "../components/Tasks";
-import { useState } from "react";
+import { useFilter } from "../context/TaskFilterContext";
 
 export default function Home() {
   const { toggle, isOpen } = useModal();
-  const [ filter, setFilter ] = useState<string>("");
-
-  const handleFilter = (filterValue: string) => {
-    setFilter(filterValue);
-  };
+  const { filter, handleFilter } = useFilter();
 
   return (
     <>
