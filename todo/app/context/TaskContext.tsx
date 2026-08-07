@@ -7,31 +7,43 @@ import {
   useEffect,
   useState,
 } from "react";
-import type { Task, Tasks } from "../types/task";
-import processTask from "../util/processTask";
+import type { Tasks } from "../types/task";
+
+import {
+  loadTasks as fetchTasks,
+  addTask as createTask,
+  deleteTask as removeTask,
+  toggleTaskStatus as toggleTask,
+  clearDeletedTasks as clearTasks,
+  editTask as updateTask,
+} from "@/app/actions/task";
 
 type TaskContextType = {
   tasks: Tasks;
-  loadTasks: () => void;
-  addTask: (task: string, dateTime: string) => void;
-  deleteTask: (id: string) => void;
-  editTask: () => void;
-  toggleTaskStatus: (id: string) => void;
-  clearDeletedTasks: () => void;
+  loadTasks: () => Promise<void>;
+  addTask: (task: string, dateTime: string) => Promise<void>;
+  deleteTask: (id: string) => Promise<void>;
+  editTask: (
+    id: string,
+    data: {
+      task?: string;
+      date?: string;
+      time?: string;
+    },
+  ) => Promise<void>;
+  toggleTaskStatus: (id: string) => Promise<void>;
+  clearDeletedTasks: () => Promise<void>;
 };
 
 const TaskContext = createContext<TaskContextType | null>(null);
 
-const key: string = "task";
-
 export default function TaskProvider({ children }: { children: ReactNode }) {
-  const [tasks, setTasks] = useState<Tasks>({ tasks: [] });
+  const [tasks, setTasks] = useState<Tasks>([]);
 
-  const loadTasks = () => {
-    const taskObjs: string | null = localStorage.getItem(key);
-    if (taskObjs && typeof taskObjs !== null) {
-      setTasks(JSON.parse(taskObjs));
-    }
+  const loadTasks = async () => {
+    const data = await fetchTasks();
+
+    setTasks(data);
   };
 
   useEffect(() => {
@@ -41,71 +53,42 @@ export default function TaskProvider({ children }: { children: ReactNode }) {
     loadTasksAsync();
   }, []);
 
-  const addTask = (task: string, dateTime: string): void => {
-    const newTask: Task = processTask(task, dateTime);
-    setTasks((prev) => {
-      const updated = {
-        tasks: [...prev.tasks, newTask],
-      };
+  const addTask = async (task: string, dateTime: string) => {
+    await createTask(task, dateTime);
 
-      localStorage.setItem(key, JSON.stringify(updated));
-
-      return updated;
-    });
+    await loadTasks();
   };
 
-  const toggleTaskStatus = (id: string): void => {
-    setTasks(prev => {
-      const updated: Tasks = {
-        ...prev,
-        tasks: prev.tasks.map(task =>
-          task.id === id
-            ? {
-                ...task,
-                status:
-                  task.status === "pending"
-                    ? "completed"
-                    : "pending",
-              }
-            : task
-        ),
-      };
+  const toggleTaskStatus = async (id: string) => {
+    await toggleTask(id);
 
-      localStorage.setItem(key, JSON.stringify(updated));
-      return updated;
-    });
+    await loadTasks();
   };
 
-  const clearDeletedTasks = (): void => {
-    setTasks(prev => {
-      const updated: Tasks = {
-        ...prev,
-        tasks: prev.tasks.filter(task => task.status !== "deleted")
-      };
+  const editTask = async (
+    id: string,
+    data: {
+      task?: string;
+      date?: string;
+      time?: string;
+    },
+  ): Promise<void> => {
+    await updateTask(id, data);
 
-      localStorage.setItem(key, JSON.stringify(updated));
-      return updated;
-    });
-  }
+    await loadTasks();
+  };
 
-  const deleteTask = (id: string): void => {
-    setTasks(prev => {
-      const updated: Tasks = {
-        ...prev,
-        tasks: prev.tasks.map(task =>
-          task.id === id
-            ? {
-                ...task,
-                status: "deleted"
-              }
-            : task
-        )
-      };
+  const deleteTask = async (id: string) => {
+    await removeTask(id);
 
-      localStorage.setItem(key, JSON.stringify(updated));
-      return updated;
-    });
-  }
+    await loadTasks();
+  };
+
+  const clearDeletedTasks = async (): Promise<void> => {
+    await clearTasks();
+
+    await loadTasks();
+  };
 
   return (
     <TaskContext.Provider
@@ -114,7 +97,7 @@ export default function TaskProvider({ children }: { children: ReactNode }) {
         loadTasks,
         addTask,
         deleteTask,
-        editTask: () => {},
+        editTask,
         toggleTaskStatus,
         clearDeletedTasks,
       }}

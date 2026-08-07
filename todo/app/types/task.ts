@@ -1,13 +1,5 @@
-export type TaskStatus = "pending" | "completed" | "deleted";
+import type { Prisma } from "@/app/generated/prisma/client";
 
-export type Task = {
-  id: string;
-  task: string;
-  date: string;
-  time: string;
-  status: TaskStatus;
-}
+export type Task = Prisma.TaskGetPayload<{}>;
 
-export type Tasks = {
-  tasks: Task[];
-};
+export type Tasks = Task[];
