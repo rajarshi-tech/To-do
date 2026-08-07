@@ -38,7 +38,7 @@ export default function HamburgerMenuLoggedOut() {
               active:scale-95 active:bg-primary-1/20"
           onClick={() => handleToggle()}
         >
-          All tasks
+          Change Theme
         </div>
       </div>
     </div>
