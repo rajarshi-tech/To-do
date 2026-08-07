@@ -26,23 +26,23 @@ export default function RootLayout({
       <body
         className={`${plusJakartaSans.className} bg-background-primary min-h-screen flex flex-col text-text-primary`}
       >
-        {/*<Providers>*/}
         <ThemeProvider attribute="class" enableSystem defaultTheme="system">
           <TaskProvider>
             <TaskFilterProvider>
               <HeaderProvider>
                 <Header />
               </HeaderProvider>
-              <main className="flex-1">
+
+              <main className="flex-1 flex flex-col">
                 <AddTaskModalProvider>
                   <EditTaskModalProvider>{children}</EditTaskModalProvider>
                 </AddTaskModalProvider>
               </main>
+
+              <Footer />
             </TaskFilterProvider>
-            <Footer />
           </TaskProvider>
         </ThemeProvider>
-        {/*</Providers>*/}
       </body>
     </html>
   );

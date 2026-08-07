@@ -9,3 +9,7 @@ export async function signOutAction() {
 export async function signInAction() {
   await signIn("github", { redirectTo: "/home" });
 }
+
+export async function signInActionGoogle() {
+  await signIn("google", { redirectTo: "/home" });
+}
