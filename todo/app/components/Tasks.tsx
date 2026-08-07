@@ -9,8 +9,8 @@ export default function Tasks({ filter }: TasksProps) {
   const { tasks } = useTask();
   const filteredTasks =
     filter === "all"
-      ? tasks.tasks
-      : tasks.tasks.filter(task => task.status === filter);
+      ? tasks
+      : tasks.filter(task => task.status === filter);
   return (
     <div>
       {filteredTasks.map(task => (
