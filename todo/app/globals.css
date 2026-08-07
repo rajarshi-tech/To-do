@@ -128,6 +128,8 @@ body {
   background-image: url("./assets/bg.png");
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 @media (min-width: 768px) {
@@ -135,6 +137,8 @@ body {
     background-image: url("./assets/bg-wide.png");
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
   }
 }
 
@@ -142,6 +146,8 @@ body {
   background-image: url("./assets/bg-dark.png");
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 @media (min-width: 768px) {
@@ -149,5 +155,7 @@ body {
     background-image: url("./assets/bg-wide-dark.png");
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
   }
 }

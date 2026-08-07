@@ -22,9 +22,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`h-full antialiased`} suppressHydrationWarning>
+    <html lang="en" className="min-h-screen antialiased">
       <body
-        className={`${plusJakartaSans.className} bg-background-primary min-h-full flex flex-col text-text-primary`}
+        className={`${plusJakartaSans.className} bg-background-primary min-h-screen flex flex-col text-text-primary`}
       >
         {/*<Providers>*/}
         <ThemeProvider attribute="class" enableSystem defaultTheme="system">
