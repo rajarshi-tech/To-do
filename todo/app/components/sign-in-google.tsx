@@ -6,7 +6,7 @@ type PropType = {
   children: React.ReactNode;
 };
 
-export default function SignIn({ formClassName, buttonClassName, children }: PropType) {
+export default function SignInGoogle({ formClassName, buttonClassName, children }: PropType) {
   return (
     <form
       className={formClassName}

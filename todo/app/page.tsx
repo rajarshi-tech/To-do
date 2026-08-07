@@ -2,6 +2,7 @@ import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import SignIn from "./components/sign-in";
 import { FaGithub, FaGoogle } from "react-icons/fa";
+import SignInGoogle from "./components/sign-in-google";
 
 export default async function Home() {
   const session = await auth();
@@ -51,7 +52,7 @@ export default async function Home() {
             <hr className="flex-1 border-border-default" />
           </div>
 
-          <SignIn
+          <SignInGoogle
             buttonClassName="
               w-full cursor-pointer rounded-2xl
               border border-border-default
@@ -69,7 +70,7 @@ export default async function Home() {
               <FaGoogle className="h-5 w-5" />
               <span>Sign in with Google</span>
             </span>
-          </SignIn>
+          </SignInGoogle>
         </div>
 
         <p className="mt-8 text-center text-sm text-text-muted">
