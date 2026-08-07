@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import SignOut from "../sign-out";
 import { UserRound } from "lucide-react";
+import { useTask } from "@/app/context/TaskContext";
 
 type UserMenuProps = {
   image: string;
@@ -14,7 +15,7 @@ type UserMenuProps = {
 
 export default function UserMenu({ image, name }: UserMenuProps) {
   const { theme, setTheme } = useTheme();
-  
+  const { clearDeletedTasks } = useTask();
   const handleToggle = () => {
     setTheme(theme === "dark" ? "light" : "dark");
   };
@@ -79,6 +80,14 @@ export default function UserMenu({ image, name }: UserMenuProps) {
           >
             About
           </Link>
+          <div
+            className="text-text-primary block mx-2 my-1 rounded-2xl px-4 py-2.5 cursor-pointer bg-secondary-1/60 transition-all duration-150
+              hover:bg-secondary-1/40 hover:translate-x-1 hover:scale-[1.02] hover:text-text-secondary
+              active:scale-95 active:bg-primary-1/20"
+            onClick={() => clearDeletedTasks()}
+          >
+            Clear Data
+          </div>
         </div>
       </div>
     </>

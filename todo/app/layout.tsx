@@ -28,21 +28,19 @@ export default function RootLayout({
       >
         {/*<Providers>*/}
         <ThemeProvider attribute="class" enableSystem defaultTheme="system">
-          <TaskFilterProvider>
-            <HeaderProvider>
-              <Header />
-            </HeaderProvider>
-            <main className="flex-1">
-              <AddTaskModalProvider>
-                <TaskProvider>
-                  <EditTaskModalProvider>
-                    {children}
-                  </EditTaskModalProvider>
-                </TaskProvider>
-              </AddTaskModalProvider>
-            </main>
-          </TaskFilterProvider>
-          <Footer />
+          <TaskProvider>
+            <TaskFilterProvider>
+              <HeaderProvider>
+                <Header />
+              </HeaderProvider>
+              <main className="flex-1">
+                <AddTaskModalProvider>
+                  <EditTaskModalProvider>{children}</EditTaskModalProvider>
+                </AddTaskModalProvider>
+              </main>
+            </TaskFilterProvider>
+            <Footer />
+          </TaskProvider>
         </ThemeProvider>
         {/*</Providers>*/}
       </body>

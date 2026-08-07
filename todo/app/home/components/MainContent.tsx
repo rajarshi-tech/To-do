@@ -16,7 +16,7 @@ export default function MainContent({ name }: MainContentProps) {
 
   return (
     <>
-      <div className="flex gap-x-4 mt-12 mx-4">
+      <div className="flex gap-x-4 mt-12 mx-4 mb-6">
         <div className="hidden md:block flex-2 self-start row-span-2 bg-secondary-2/30 backdrop-blur-md p-4 rounded-md border-2 border-border-strong">
           <div
             className="cursor-pointer text-text-primary border-b border-b-primary-2 p-2 mt-2 transition-all duration-200
