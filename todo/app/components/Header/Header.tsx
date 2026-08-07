@@ -5,6 +5,7 @@ import HamburgerMenu from "./HamburgerMenu";
 import Overlay from "./Overlay";
 import UserMenu from "./UserMenu";
 import Login from "./Login";
+import HamburgerMenuLoggedOut from "./HamburgerMenuLoggedOut";
 
 export default async function Header() {
   const session = await auth();
@@ -19,7 +20,8 @@ export default async function Header() {
         {/* Main Logo */}
         <div className="flex items-center">
           {/* Hamburger icon and floating menu container */}
-          <HamburgerMenu />
+          {session && <HamburgerMenu />}
+          {!session && <HamburgerMenuLoggedOut />}
           <Link
             href="/home"
             className={`${mPlusRounded1c.className} block cursor-pointer mx-1.5 my-2 font-black text-4xl p-2 text-primary-1`}
