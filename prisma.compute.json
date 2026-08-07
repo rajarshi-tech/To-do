@@ -1,0 +1,12 @@
+{
+  "region": "ap-southeast-1",
+  "app": {
+    "name": "todo",
+    "root": "todo",
+    "framework": "nextjs",
+    "httpPort": 3000,
+    "build": {
+      "command": "npm run build"
+    }
+  }
+}
