@@ -1,4 +1,4 @@
-import { signInAction } from "@/app/actions/auth";
+import { signInActionGoogle } from "@/app/actions/auth";
 
 type PropType = {
   formClassName?: string;
@@ -10,7 +10,7 @@ export default function SignInGoogle({ formClassName, buttonClassName, children 
   return (
     <form
       className={formClassName}
-      action={signInAction}
+      action={signInActionGoogle}
     >
       <button className={buttonClassName} type="submit">{children}</button>
     </form>
